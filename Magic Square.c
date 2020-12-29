@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include<stdio.h>
 int sq[50][50],n,i,j,count=0,value,sum;
 void filldown()
@@ -218,4 +217,3 @@ int main()
    printf("\nSum across any line : %d ",sum);
    return 0;
 }
->>>>>>> 004cd17f68786815cf678c72324b56dd71461f52
