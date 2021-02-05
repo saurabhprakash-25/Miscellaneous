@@ -58,8 +58,6 @@ inline    bool  IsArrayFull        ();
     int *       vArray;
     int         vSize;
     int         vNumElementsPresent;
-    int         vMin;
-    int         vMax;
     int         vSum;
 };
 

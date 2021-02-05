@@ -30,7 +30,7 @@ inline Array::~Array ()
 inline int Array::Get (int pIndex)
 {
     if (IsIndexOutOfBound (pIndex))
-        throw ArrayException("Index out of Range");
+        throw ArrayException("Invalid Index");
 
     return vArray[pIndex];
 }
