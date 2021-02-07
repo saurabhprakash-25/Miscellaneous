@@ -4,61 +4,71 @@
 #include<iostream>
 #include<string>
 #include<algorithm>
+#include<assert.h>
 using namespace std;
 
 class ArrayException {
 
-  public:
-inline          ArrayException      (string pExceptionMessage);
-
-inline  string  WhatIsTheException  ();
-
-  private :
+  private:
     string    whatis;
+
+    enum class eExceptionType
+    {
+        INVALID_INDEX = 0,
+        ARRAY_FULL,
+    };
+
+  public:
+                                ArrayException      (eExceptionType pExceptionType);
+static  inline  eExceptionType  InvalidIndex        ();
+static  inline  eExceptionType  ArrayFull           ();
+
+        inline  string          WhatIsTheException  ();
+
 };
 
 class Array {
 
   public:
 
-inline          Array               (int pSize);
-inline          ~Array              ();
+inline              Array               (int pSize);
+inline              ~Array              ();
 
-        // Get, Set
-inline  int     Get                 (int pIndex);
-        void    Set                 (int pIndex, int pValue);
+        // Get, Set opearations
+inline  int         Get                 (int pIndex);
+        void        Set                 (int pIndex, int pValue);
 
-        // Insertion
-        void    Insert              (int pValue);
-        void    InsertAtIndex       (int pIndex, int pValue);
-        void    InsertAtBeginning   (int pValue);
-        void    InsertAtEnd         (int pValue);
+        // Insertion operations
+        void        Insert              (int pValue);
+        void        InsertAtIndex       (int pIndex, int pValue);
+        void        InsertAtBeginning   (int pValue);
+        void        InsertAtEnd         (int pValue);
 
-        // Deletion
-        void    DeleteFromBeginning ();
-        void    DeleteFromEnd       ();
-        void    DeleteAtIndex       (int pIndex);
+        // Deletion operations
+        void        DeleteFromBeginning ();
+        void        DeleteFromEnd       ();
+        void        DeleteAtIndex       (int pIndex);
 
-        // Mathematical informations
-        int     Average             ();
-        int     Sum                 ();
+        // Mathematical information
+        double      Average             ();
+        long long   Sum                 ();
 
-        void    Display             (int pStartIdx = 0 , int pEndIdx = 0);
-        void    ShiftRight          (int pShiftFactor, int pStartIdx = 0, int pEndIdx = 0);
-        void    ShiftLeft           (int pShiftFactor, int pStartIdx = 0, int pEndIdx = 0);
+        void        Display             (int pStartIndex = 0 , int pEndIndex = 0);
+        void        ShiftRight          (int pShiftFactor, int pStartIndex = 0, int pEndIndex = 0);
+        void        ShiftLeft           (int pShiftFactor, int pStartIndex = 0, int pEndIndex = 0);
 
-inline  bool    IsIndexOutOfBound   (int pIndex);
+inline  bool        IsIndexOutOfBound   (int pIndex);
 
         // Meta-information about the array
-inline    int   ArraySize          ();
-inline    int   NumberOfElements   ();
-inline    bool  IsArrayFull        ();
+inline    int       ArraySize          ();
+inline    int       NumberOfElements   ();
+inline    bool      IsArrayFull        ();
 
   private:
     int *       vArray;
     int         vSize;
     int         vNumElementsPresent;
-    int         vSum;
+    long long   vSum;
 };
 
 #include "array.hxx"

@@ -1,9 +1,14 @@
 #ifndef ARRAY_HXX
 #define ARRAY_HXX
 
-inline ArrayException::ArrayException (string pExceptionMessage)
+inline ArrayException::eExceptionType ArrayException::InvalidIndex ()
 {
-    whatis = pExceptionMessage;
+    return eExceptionType::INVALID_INDEX;
+}
+
+inline ArrayException::eExceptionType ArrayException::ArrayFull ()
+{
+    return eExceptionType::ARRAY_FULL;
 }
 
 inline string ArrayException::WhatIsTheException ()
@@ -13,12 +18,10 @@ inline string ArrayException::WhatIsTheException ()
 
 inline Array::Array (int pSize)
 {
-    vArray              = new int (pSize);
+    vArray              = new int[pSize]();
     vSize               = pSize;
     vNumElementsPresent = 0;
     vSum                = 0;
-    vMin                = INT_MAX;
-    vMax                = INT_MIN;
 }
 
 inline Array::~Array ()
@@ -30,17 +33,17 @@ inline Array::~Array ()
 inline int Array::Get (int pIndex)
 {
     if (IsIndexOutOfBound (pIndex))
-        throw ArrayException("Invalid Index");
+        throw ArrayException (ArrayException::InvalidIndex ());
 
     return vArray[pIndex];
 }
 
-inline int Array::Average ()
+inline double Array::Average ()
 {
     return (vSum / NumberOfElements ());
 }
 
-inline int Array::Sum ()
+inline long long Array::Sum ()
 {
     return vSum;
 }
@@ -52,7 +55,7 @@ inline bool Array::IsArrayFull ()
 
 inline bool Array::IsIndexOutOfBound (int pIndex)
 {
-    return (pIndex < 0 || (pIndex > NumberOfElements () - 1));
+    return (pIndex < 0 || pIndex >= ArraySize ());
 }
 
 inline int Array::ArraySize ()
