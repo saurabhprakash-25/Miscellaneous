@@ -7,8 +7,8 @@ long long power (int pNum, int pExponent, int pResult) {
 		return pResult;
 
 	if (pExponent == 1)
-		return pResult * pNum;	
-	
+		return pResult * pNum;
+
 	return power(pNum, pExponent - 1, pResult * pNum);
 }
 
@@ -19,7 +19,7 @@ int main (){
 	std::cin>>m;
 	std::cin>>n;
 
-	std::cout<<power (m, n, m);
+	std::cout<<power (m, n, 1);
 
 	return 0;
 }
