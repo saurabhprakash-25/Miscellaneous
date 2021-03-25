@@ -1,7 +1,8 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-long long FindFibonacci(int pNum, long long * pSol) {
+long long FindFibonacci(int pNum, vector<long long> & pMemo) {
 
 	if (pNum == 0)
 		return 0;
@@ -9,25 +10,24 @@ long long FindFibonacci(int pNum, long long * pSol) {
 	if (pNum == 1)
 		return 1;
 
-	if (pSol[pNum])
-		return pSol[pNum];
+	if (pMemo[pNum - 1])
+		return pMemo[pNum - 1];
 
-	pSol[pNum] = FindFibonacci(pNum - 1, pSol) + FindFibonacci(pNum - 2, pSol);
+	pMemo[pNum -1] = FindFibonacci(pNum - 1, pMemo) + FindFibonacci(pNum - 2, pMemo);
 
-	return pSol[pNum];
+	return pMemo[pNum - 1];
 }
 
 int main()
 {
-	int				n;
-	long long *		sol;
+	int				    n;
 
-	cout << "Which fibonacci number do you want me to find ? : ";
+    cout << "Which fibonacci number do you want me to find ? : ";
 	cin >> n;
 
-	sol = new long long[n+1]();
+    vector<long long>   memo(n, 0);
 
-	cout << FindFibonacci(n, sol);
+	cout << FindFibonacci(n, memo);
 
 	return 0;
 }
