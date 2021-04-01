@@ -5,16 +5,17 @@
 // generate the targetSum using numbers in the array
 #include<iostream>
 #include<vector>
+#include<map>
 using namespace std;
 
-vector<bool>	memo;
+map<int,bool>	memo;
 
 bool canSum(int targetSum, vector<int> numbers)
 {
-    if (targetSum == 0)
-        return true;
+    if (memo.find (targetSum) != memo.end())
+        return memo[targetSum];
 
-    if (memo[targetSum])
+    if (targetSum == 0)
         return true;
 
     for (auto num : numbers) {
@@ -29,7 +30,7 @@ bool canSum(int targetSum, vector<int> numbers)
                 return memo[targetSum];
             }
         }
- }
+    }
 
     memo[targetSum] = false;
 
@@ -53,8 +54,6 @@ int main()
 
     cout << "Enter the target sum :";
     cin >> targetSum;
-
-    memo.resize(targetSum + 1);
 
     if (canSum(targetSum, numbers))
         cout << "true";
